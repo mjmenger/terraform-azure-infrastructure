@@ -14,9 +14,8 @@ resource "azurerm_resource_group" "main" {
     name     = format("%s-resourcegroup-%s",var.prefix,random_id.id.hex)
     location = var.region
 
-    tags = {
-        environment = var.environment
-    }
+    tags = merge(local.tags,{})
+
 }
 
 # Create storage account for boot diagnostics
@@ -27,9 +26,7 @@ resource "azurerm_storage_account" "mystorageaccount" {
     account_tier                = "Standard"
     account_replication_type    = "LRS"
 
-    tags = {
-        environment = var.environment
-    }
+    tags = merge(local.tags,{})
 }
 
 
@@ -51,9 +48,8 @@ resource "azurerm_network_security_group" "securitygroup" {
         destination_address_prefix = "*"
     }
 
-    tags = {
-        environment = var.environment
-    }
+    tags = merge(local.tags,{})
+
 }
 
 # Generate random text for a unique storage account name
