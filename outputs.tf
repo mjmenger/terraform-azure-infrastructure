@@ -7,13 +7,13 @@ output resourcegroup_name {
 }
 
 output private_subnet_ids {
-    value = azurerm_subnet.private[*].id
+    value = data.azurerm_subnet.internal[*].id
 }
 
 output public_subnet_ids {
-    value = azurerm_subnet.public[*].id
+    value = data.azurerm_subnet.external[*].id
 }
 
 output management_subnet_ids {
-    value = azurerm_subnet.management[*].id
+    value = data.azurerm_subnet.mgmt[*].id
 }
